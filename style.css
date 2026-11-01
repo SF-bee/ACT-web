@@ -962,3 +962,28 @@ body.modal-open {
     display: block;
   }
 }
+
+/* Gentle motion and clear feedback for mouse, touch and keyboard. */
+.reading-progress { position: fixed; z-index: 20; top: 0; left: 0; width: 100%; height: 3px; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, #4d69ee, #e989c2); pointer-events: none; }
+.hero-art .star, .hero-art .little-star { animation: sparkle-float 4s ease-in-out infinite alternate; }
+.hero-art .little-star { animation-delay: -1.5s; }
+.bubble { animation: bubble-float 4.5s ease-in-out infinite; }
+.department-art .vinyl, .department-art .cos-card, .department, .nav-join, .poster-caption > span { transition: transform .35s ease, box-shadow .35s ease, background-color .25s ease; }
+.department:nth-child(2) { transition-delay: .12s; }
+.poster-button:nth-child(2) { transition-delay: .1s; }
+@media (hover: hover) and (pointer: fine) {
+  .department:hover { transform: translateY(-5px); box-shadow: 0 18px 45px #7075ad1c; }
+  .department:hover .vinyl { transform: rotate(5deg) scale(1.04); }
+  .department:hover .cos-card { transform: rotate(-18deg) translateX(-48px); }
+  .department:hover .cos-card.front { transform: rotate(17deg) translateX(72px); }
+  .nav-join:hover { background: #edf0fe; transform: translateY(-2px); }
+  .poster-button:hover .poster-caption > span { background: var(--blue); color: white; transform: rotate(45deg); }
+}
+.button:active, .nav-join:active, .poster-button:active .poster-stage, .close:active { transform: scale(.97); }
+.poster-button:focus-visible .poster-caption > span { background: var(--blue); color: white; }
+dialog[open] { animation: dialog-in .25s ease-out both; }
+@keyframes sparkle-float { from { translate: 0 0; } to { translate: 0 -8px; } }
+@keyframes bubble-float { 50% { translate: 0 -5px; } }
+@keyframes dialog-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+@media (max-width: 699px) { .hero-art .star, .hero-art .little-star, .bubble { animation-duration: 6s; } }
+@media (prefers-reduced-motion: reduce) { .reading-progress { transition: none; } }

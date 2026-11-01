@@ -119,3 +119,24 @@ addEventListener('scroll', () => {
 }, { passive: true });
 reducedMotion.addEventListener('change', updateParallax);
 mobile.addEventListener('change', updateParallax);
+
+// A passive progress indicator makes the page's length visible without changing scrolling.
+const progress = document.createElement('div');
+progress.className = 'reading-progress';
+progress.setAttribute('aria-hidden', 'true');
+document.body.append(progress);
+let progressPending = false;
+function updateReadingProgress() {
+  progressPending = false;
+  const scrollable = document.documentElement.scrollHeight - innerHeight;
+  progress.style.transform = `scaleX(${scrollable > 0 ? Math.min(1, Math.max(0, scrollY / scrollable)) : 0})`;
+}
+function requestProgressUpdate() {
+  if (!progressPending) {
+    progressPending = true;
+    requestAnimationFrame(updateReadingProgress);
+  }
+}
+addEventListener('scroll', requestProgressUpdate, { passive: true });
+addEventListener('resize', requestProgressUpdate);
+updateReadingProgress();
