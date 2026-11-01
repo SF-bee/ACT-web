@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs><linearGradient id="ring" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5075f2"/><stop offset="1" stop-color="#d18bc9"/></linearGradient></defs>
+  <circle cx="32" cy="32" r="29" fill="#faf9ff" stroke="url(#ring)" stroke-width="3"/>
+  <path d="M14 24h20M17 32h15M12 40h24" fill="none" stroke="#536de6" stroke-width="3.7" stroke-linecap="round"/>
+  <path d="M40 14l11 3v29H40z" fill="#eae9ff" stroke="#826dd1" stroke-width="2.3" stroke-linejoin="round"/>
+  <path d="M42 24h7M42 33h7" fill="none" stroke="#b6a3df" stroke-width="1"/>
+  <path d="M42 9v8M38 13h8" stroke="#e78bbd" stroke-width="2" stroke-linecap="round"/>
+</svg>

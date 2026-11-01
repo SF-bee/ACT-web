@@ -89,11 +89,15 @@ const mobile = matchMedia('(max-width: 699px)');
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        // Remember which edge was crossed so returning elements enter from that side.
+        entry.target.dataset.exit = entry.boundingClientRect.top < 0 ? 'above' : 'below';
+        entry.target.classList.remove('visible');
+      }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0, rootMargin: '-12% 0px -12% 0px' });
   document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
   document.documentElement.classList.add('motion');
 }

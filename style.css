@@ -1045,3 +1045,10 @@ dialog[open] { animation: dialog-in .25s ease-out both; }
   .contact-grid article button { grid-column: 2; grid-row: 1 / 3; }
 }
 @media (prefers-reduced-motion: reduce) { .typing-cursor { display: none; } }
+
+/* Sections enter from either edge and can animate again when revisited. */
+.motion .reveal[data-exit="above"]:not(.visible) { transform: translateY(-32px); }
+.motion .reveal:focus-within { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .motion .reveal:not(.visible) { opacity: 1; transform: none; }
+}
