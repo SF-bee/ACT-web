@@ -176,3 +176,49 @@ document.querySelector('.hero').addEventListener('pointerup', event => {
   document.body.append(burst);
   setTimeout(() => burst.remove(), 800);
 });
+
+// Keep the headline accessible as one stable sentence; the visual line cycles gently.
+const typedPhrase = document.querySelector('#typed-phrase');
+const phrases = ['在这里相遇', '在这里发光', '在这里共鸣'];
+let phraseIndex = 0;
+let typingTimer;
+function resetTyping() {
+  clearTimeout(typingTimer);
+  phraseIndex = 0;
+  typedPhrase.textContent = phrases[0];
+  if (!reducedMotion.matches && !document.hidden) typingTimer = setTimeout(erasePhrase, 3500);
+}
+function erasePhrase() {
+  if (reducedMotion.matches || document.hidden) return;
+  if (typedPhrase.textContent.length) {
+    typedPhrase.textContent = Array.from(typedPhrase.textContent).slice(0, -1).join('');
+    typingTimer = setTimeout(erasePhrase, 110);
+  } else {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    typingTimer = setTimeout(() => typePhrase(0), 350);
+  }
+}
+function typePhrase(index) {
+  if (reducedMotion.matches || document.hidden) return;
+  const characters = Array.from(phrases[phraseIndex]);
+  typedPhrase.textContent = characters.slice(0, index).join('');
+  typingTimer = index < characters.length
+    ? setTimeout(() => typePhrase(index + 1), 180)
+    : setTimeout(erasePhrase, 3500);
+}
+reducedMotion.addEventListener('change', resetTyping);
+document.addEventListener('visibilitychange', resetTyping);
+resetTyping();
+
+document.querySelectorAll('[data-copy]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const feedback = document.querySelector('.contact-feedback');
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(button.dataset.copy);
+      feedback.textContent = '已复制，可以粘贴使用。';
+    } catch {
+      feedback.textContent = '复制不可用，请长按或选中上方号码手动复制。';
+    }
+  });
+});

@@ -1005,3 +1005,43 @@ dialog[open] { animation: dialog-in .25s ease-out both; }
 @keyframes burst-out { from { opacity: 1; transform: translate(-50%, -50%) scale(.5); } to { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.25) rotate(75deg); } }
 @media (max-width: 699px) { .stardust span { font-size: 12px; } .stardust span:nth-child(n+10) { display: none; } }
 @media (prefers-reduced-motion: reduce) { .stardust, .spark-burst { display: none; } }
+
+/* ACT's mark is inspired by the school's circular emblem. */
+.logo { display: inline-flex; align-items: center; gap: 9px; }
+.club-mark { width: 37px; height: 37px; display: block; flex-shrink: 0; }
+.campus { padding-top: 120px; padding-bottom: 95px; }
+.campus-top { text-align: center; margin-bottom: 42px; }
+.campus-top h2 { font-size: clamp(30px, 3.8vw, 52px); }
+.campus-top > p:last-child { margin: 20px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.campus-scene { margin: 0 auto; max-width: 1440px; border-radius: 24px; overflow: hidden; position: relative; background: #dce9f8; box-shadow: 0 25px 70px #606ca71a; }
+.campus-scene img { display: block; width: 100%; height: auto; transition: transform 1s ease; }
+.campus-scene figcaption { display: flex; justify-content: space-between; gap: 15px; position: absolute; inset: auto 0 0; padding: 50px 30px 24px; color: white; background: linear-gradient(transparent, #242b4275); font-size: 10px; letter-spacing: 1.5px; text-shadow: 0 1px 8px #0008; }
+@media (hover:hover) and (pointer:fine) { .campus-scene:hover img { transform: scale(1.035); } }
+.typed-line { display: inline-block; min-width: 5em; }
+.typing-cursor { display: inline-block; width: 2px; height: .82em; background: #8b80df; margin-left: .09em; vertical-align: -.04em; animation: cursor-blink .9s step-end infinite; }
+@keyframes cursor-blink { 50% { opacity: 0; } }
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; max-width: 870px; margin: 38px auto 0; text-align: left; }
+.contact-grid article { padding: 22px; border: 1px solid #e5e3ed; border-radius: 18px; background: #ffffffa8; display: grid; gap: 12px; align-content: start; }
+.contact-grid article span { font-size: 11px; color: var(--muted); }
+.contact-grid article strong { font-size: 15px; overflow-wrap: anywhere; letter-spacing: 0; }
+.contact-grid button { justify-self: start; border: 0; color: var(--blue); background: #edf0fe; padding: 8px 16px; border-radius: 20px; cursor: pointer; transition: background .2s, transform .2s; }
+.contact-grid button:hover { background: #dce3ff; }
+.contact-grid button:active { transform: scale(.95); }
+.contact-feedback { min-height: 1.5em; font-size: 12px; color: var(--blue); margin: 14px 0 0; }
+@media(max-width: 600px) {
+  .club-mark { width: 31px; height: 31px; }
+  .logo { gap: 6px; }
+  .campus { padding-top: 75px; padding-bottom: 70px; }
+  .campus-top { text-align: left; margin-bottom: 25px; }
+  .campus-top h2 { font-size: 29px; }
+  .campus-scene { border-radius: 16px; }
+  .campus-scene img { aspect-ratio: 4/3; object-fit: cover; object-position: 61% center; }
+  .campus-scene figcaption { padding: 40px 16px 16px; font-size: 9px; }
+  .campus-scene figcaption span:first-child { display: none; }
+  .contact-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 28px; }
+  .contact-grid article { grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 17px 18px; }
+  .contact-grid article span { grid-column: 1; }
+  .contact-grid article strong { grid-column: 1; }
+  .contact-grid article button { grid-column: 2; grid-row: 1 / 3; }
+}
+@media (prefers-reduced-motion: reduce) { .typing-cursor { display: none; } }
