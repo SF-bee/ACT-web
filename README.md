@@ -2,6 +2,8 @@
 
 让热爱，在这里相遇。
 
+**在线访问：[ACT 动漫社](https://sf-bee.github.io/ACT-web/)**
+
 明亮的蓝粉紫单页网站，包含社团介绍、CV / Cos 部门、往期招新海报展示与入社信息。原生 HTML、CSS、JavaScript，无需安装依赖或构建。
 
 ## 本地预览
