@@ -52,6 +52,14 @@ header {
   font-weight:850;
   letter-spacing:-3px;
 }
+/* Draw the brand mark as geometry so mobile fonts cannot substitute an emoji. */
+.brand-spark {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+  flex-shrink: 0;
+}
 .logo span {
   display:inline-block;
   color:var(--blue);
@@ -769,7 +777,7 @@ body.modal-open {
   .asterisk {
     font-size:40px;
     right:-14px;
-    top:0;
+    top:-52px;
   }
   .orbit {
     height:140px;
