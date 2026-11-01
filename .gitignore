@@ -1,0 +1,6 @@
+.DS_Store
+/work/
+/preview/
+.env
+.env.*
+*.log
