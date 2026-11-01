@@ -140,3 +140,39 @@ function requestProgressUpdate() {
 addEventListener('scroll', requestProgressUpdate, { passive: true });
 addEventListener('resize', requestProgressUpdate);
 updateReadingProgress();
+
+// Decorative stardust stays inside the opening scene and never captures input.
+const heroArt = document.querySelector('.hero-art');
+const stardust = document.createElement('div');
+stardust.className = 'stardust';
+stardust.setAttribute('aria-hidden', 'true');
+const shapes = ['✦', '♪', '✧', '·'];
+for (let i = 0; i < 14; i++) {
+  const particle = document.createElement('span');
+  particle.textContent = shapes[i % shapes.length];
+  particle.style.setProperty('--x', `${5 + ((i * 37) % 90)}%`);
+  particle.style.setProperty('--duration', `${5 + (i % 5)}s`);
+  particle.style.setProperty('--delay', `${-i * 0.73}s`);
+  particle.style.setProperty('--drift', `${i % 2 ? 24 : -20}px`);
+  stardust.append(particle);
+}
+heroArt.prepend(stardust);
+
+// A short burst appears at the touch or click point, without blocking controls.
+document.querySelector('.hero').addEventListener('pointerup', event => {
+  if (reducedMotion.matches || event.target.closest('a, button') || event.button !== 0) return;
+  const burst = document.createElement('div');
+  burst.className = 'spark-burst';
+  burst.setAttribute('aria-hidden', 'true');
+  burst.style.left = `${event.clientX}px`;
+  burst.style.top = `${event.clientY}px`;
+  for (let i = 0; i < 6; i++) {
+    const spark = document.createElement('span');
+    spark.textContent = i % 2 ? '✧' : '✦';
+    spark.style.setProperty('--dx', `${Math.cos(i * Math.PI / 3) * 38}px`);
+    spark.style.setProperty('--dy', `${Math.sin(i * Math.PI / 3) * 38}px`);
+    burst.append(spark);
+  }
+  document.body.append(burst);
+  setTimeout(() => burst.remove(), 800);
+});
